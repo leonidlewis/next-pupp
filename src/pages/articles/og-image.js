@@ -2,7 +2,7 @@ const path = require('path');
 const { createHash } = require('crypto');
 const fs = require('fs');
 const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
