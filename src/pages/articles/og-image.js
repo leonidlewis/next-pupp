@@ -24,11 +24,15 @@ export async function generateOgImage(props) {
     // File does not exist, create it
   }
 
+  // Choose executable path based on environment
+  const executablePath =
+    process.env.AWS_REGION || process.env.VERCEL
+      ? await chromium.executablePath
+      : puppeteer.executablePath();
+
   const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless: true,
   });
 
   const page = await browser.newPage();
